@@ -6,6 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
+use App\Models\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -20,5 +22,17 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table("users")->insert([
+            'name' => 'alberto',
+            'password' => Hash::make('alberto12'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $user = User::find(1); 
+        $user->assignRole(Role::find(1));
+        $user = User::find(2); 
+        $user->assignRole(Role::find(2));
     }
 }
